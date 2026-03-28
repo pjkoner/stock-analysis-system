@@ -1,15 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_cors import CORS
-from services.data_collector import DataCollector
-from services.analyzer import StockAnalyzer
 import datetime
 
 app = Flask(__name__)
 CORS(app)
 
 # 初始化服务
-data_collector = DataCollector()
-analyzer = StockAnalyzer()
 
 @app.route('/')
 def home():
@@ -40,14 +36,10 @@ def get_daily_analysis():
         }
         stock_data.append(stock_info)
     
-    # 使用分析器进行分析
-    analysis_result = analyzer.analyze_daily_trend([{'c': 1500}])  # 示例数据
-    
     return jsonify({
         'status': 'success',
         'data': {
             'stock_data': stock_data,
-            'analysis': analysis_result,
             'date': datetime.datetime.now().strftime('%Y-%m-%d'),
             'summary': '今日市场整体上涨'
         }
@@ -65,17 +57,14 @@ def get_weekly_analysis():
         {'c': 3150, 't': '2025-03-17'},
     ]
     
-    # 使用分析器进行分析
-    analysis_result = analyzer.analyze_weekly_trend(weekly_data)
-    
     return jsonify({
         'status': 'success',
         'data': {
             'week': '2025-03-14至2025-03-21',
-            'summary': analysis_result['summary'],
-            'trend': analysis_result['weekly_trend'],
-            'avg_change': analysis_result['avg_change'],
-            'volatility': analysis_result['volatility'],
+            'summary': '本周市场整体上涨，科技板块表现强劲',
+            'trend': '上涨',
+            'avg_change': 2.5,
+            'volatility': 1.2,
             'sectors': [
                 {'name': '金融', 'performance': '+3.2%'},
                 {'name': '科技', 'performance': '+5.1%'},
@@ -177,7 +166,6 @@ def get_rolling_data():
         },
         {
             'code': '601318',
-            '3',
             'name': '中国平安',
             'price': 70.30,
             'change': '+1.2%',

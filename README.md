@@ -102,7 +102,27 @@ npm start
 - 后端开发：后端Bot
 
 ## GitHub部署状态
-**本地Git仓库**：已初始化，有6个提交记录
+**本地Git仓库**：已初始化，有10个提交记录
 **项目准备**：所有文件已提交，可随时推送到GitHub
 **部署指南**：已提供完整部署脚本和步骤
 **剩余工作**：GitHub仓库创建（需要GitHub账号授权）
+
+## GitHub部署解决方案
+由于GitHub连接问题，提供多种解决方案：
+
+### 方案1：GitHub网站手动创建
+1. 登录GitHub网站创建仓库
+2. 提供仓库URL给前端Bot
+3. 前端Bot推送代码
+
+### 方案2：GitHub CLI认证token
+1. 获取GitHub Personal Access Token
+2. 使用gh CLI登录
+3. 创建仓库并推送
+
+### 方案3：归档文件交付
+1. 下载`stock-analysis-core.tar.gz`归档文件
+2. 在可访问GitHub的设备上传
+3. 解压后手动提交
+
+### 详情请查看`github-deployment-solutions.md`
